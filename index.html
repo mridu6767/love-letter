@@ -33,7 +33,7 @@
     .letter-paper { position:relative; padding:26px 24px 22px; text-align:left; border:1px solid #f1cfda; border-radius:12px; background:repeating-linear-gradient(var(--paper),var(--paper) 31px,#f6e2e7 32px); box-shadow:0 8px 20px #a64f6d12; }
     .letter-paper::after { content:"♡"; position:absolute; right:18px; top:12px; color:#dc91a6; font-size:23px; }.letter-paper p{margin:0 0 14px;font-size:16px;line-height:1.65}.letter-paper p:last-child{margin-bottom:0}.sign{text-align:right!important;color:#a34f6a;font-style:italic}
     .again { margin-top:17px; border:1px solid #e8b6c5; border-radius:99px; padding:9px 16px; color:#99516a; background:#fff7f8; font:600 12px Arial,sans-serif; cursor:pointer; }.again:hover{background:#ffe8ef}
-    footer { margin-top:25px; color:#a87887; font:12px Arial,sans-serif; }
+    .question-card { margin-top:24px; padding:20px 16px; text-align:center; border:1px dashed #e5a5b8; border-radius:16px; background:#fff0f5; }.question-card h2 { margin:0 0 8px; color:#a34f6a; font-size:23px; font-weight:500; }.question-card p { margin:0 0 14px; line-height:1.55; }.choice-buttons { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }.choice { border:1px solid #e3a2b6; border-radius:99px; padding:10px 20px; font:600 14px Arial,sans-serif; cursor:pointer; transition:transform .2s,background .2s; }.choice:hover { transform:translateY(-2px); }.yes-choice { color:white; background:#d66f91; }.yes-choice:hover { background:#c75c80; }.no-choice { color:#99516a; background:#fffafd; }.no-choice:hover { background:#ffe1eb; }.answer-message { min-height:25px; margin:14px 0 0!important; color:#a34f6a; font-weight:bold; }.crying-stickers { display:flex; justify-content:center; flex-wrap:wrap; gap:5px; }.crying-sticker { display:inline-block; font-size:32px; animation:sticker-pop .35s cubic-bezier(.2,1.5,.5,1) both; } @keyframes sticker-pop { from { transform:scale(.2) rotate(-20deg); opacity:0; } to { transform:scale(1) rotate(0); opacity:1; } }footer { margin-top:25px; color:#a87887; font:12px Arial,sans-serif; }
     .float-heart { position:fixed; z-index:5; bottom:-35px; pointer-events:none; color:#e27f9f; animation:rise 2.5s ease-out forwards; }
     @keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}} @keyframes twinkle{to{opacity:.25;transform:scale(.8) rotate(12deg)}}
     @media(max-width:420px){.card{padding:29px 20px}.envelope{height:168px}.letter-peek{height:125px}.letter-paper{padding:24px 18px 18px}}
@@ -58,7 +58,7 @@
         <p>Thank you for every laugh, every sweet little moment, and for being someone my heart feels at "home" with. I hope you always remember how very loved you are.</p>
         <p>I hope i get to wish you boyfriend's day like this every single year. I'm so lucky to have you🥹🫶 kandi dim bsa imn moom lage tuk🥹🥹🥹you're my baby ilysmmm. ♡</p>
         <p class="sign">All my love,<br>Your favourite girl ♡</p>
-      <p class="sign">HAPPY BOYFRIEND'S DAYY MY LOVE🥹💋</p></article><button class="again" id="againButton" type="button">Fold it back up</button></div></div>
+      <p class="sign">HAPPY BOYFRIEND'S DAYY MY LOVE🥹💋</p><section class="question-card" aria-labelledby="loveQuestionTitle"><h2 id="loveQuestionTitle">One tiny question…</h2><p>Do you love me? 🥺</p><div class="choice-buttons"><button class="choice yes-choice" id="yesButton" type="button">Yes, always! 💗</button><button class="choice no-choice" id="noButton" type="button">No 🙈</button></div><p class="answer-message" id="answerMessage" aria-live="polite"></p><div class="crying-stickers" id="cryingStickers" aria-label="Crying stickers"></div></section></article><button class="again" id="againButton" type="button">Fold it back up</button></div></div>
       <footer>made with a whole lot of love ♡</footer>
     </section>
   </main>
@@ -85,7 +85,7 @@
       }
     }
     button.addEventListener('click', openLetter);
-    document.getElementById('againButton').addEventListener('click', openLetter);
+    document.getElementById('againButton').addEventListener('click', openLetter);const answerMessage = document.getElementById('answerMessage');const cryingStickers = document.getElementById('cryingStickers');document.getElementById('noButton').addEventListener('click', () => {answerMessage.textContent = 'Nooo, my heart! I’m crying again 😭';const sticker = document.createElement('span');sticker.className = 'crying-sticker';sticker.textContent = ['😭','🥺','😿','💔'][cryingStickers.children.length % 4];sticker.setAttribute('aria-hidden', 'true');cryingStickers.appendChild(sticker);if (cryingStickers.children.length > 12) cryingStickers.firstElementChild.remove();});document.getElementById('yesButton').addEventListener('click', () => {answerMessage.textContent = 'YAYYY! I love you too! 💗💞';cryingStickers.replaceChildren();});
   </script>
 </body>
 </html>
