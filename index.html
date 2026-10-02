@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff3f7">
+  <title>A little love letter for you ♡</title>
+  <style>
+    :root { --pink:#ed8dab; --deep:#9d4967; --ink:#603d4a; --paper:#fffaf7; --rose:#ffe2eb; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100svh; overflow-x:hidden; color:var(--ink); font-family:Georgia,"Times New Roman",serif; background:radial-gradient(ellipse at 15% 10%,#fff 0 8%,transparent 36%),linear-gradient(145deg,#fff4f7 0%,#ffe6ee 50%,#fff6f1 100%); }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.36; background-image:radial-gradient(#e69bb2 1px,transparent 1px); background-size:24px 24px; }
+    .page { position:relative; min-height:100svh; display:grid; place-items:center; padding:38px 18px 28px; }
+    .sparkle { position:fixed; color:#df91a8; opacity:.7; animation:twinkle 2.8s ease-in-out infinite alternate; }
+    .s1{top:12%;left:9%;font-size:26px}.s2{top:20%;right:11%;font-size:19px;animation-delay:.8s}.s3{bottom:15%;left:13%;font-size:20px;animation-delay:1.3s}.s4{bottom:12%;right:9%;font-size:28px;animation-delay:.4s}
+    .card { width:min(100%,560px); text-align:center; padding:clamp(26px,6vw,48px) clamp(20px,7vw,58px); border:1px solid #f2cad6; border-radius:28px; background:rgba(255,250,247,.88); box-shadow:0 24px 70px #b96d8530,inset 0 0 0 7px #fff7f8; }
+    .eyebrow { color:var(--deep); letter-spacing:.18em; text-transform:uppercase; font:600 11px/1.4 Arial,sans-serif; }
+    h1 { margin:12px 0 8px; color:#a85370; font-size:clamp(34px,8vw,52px); font-weight:500; line-height:1.08; }
+    .intro { margin:0 auto 27px; max-width:360px; font-size:17px; line-height:1.65; }
+    .envelope-button { display:block; margin:0 auto; padding:0; width:min(100%,320px); border:0; background:none; cursor:pointer; color:inherit; }
+    .envelope-button:focus-visible { outline:3px solid #bd6684; outline-offset:9px; border-radius:10px; }
+    .envelope { position:relative; height:190px; margin:0 auto 15px; filter:drop-shadow(0 12px 14px #a24e6820); transition:transform .25s ease; }
+    .envelope-button:hover .envelope { transform:translateY(-5px) rotate(-1deg); }
+    .env-back { position:absolute; inset:28px 0 0; background:#eaa1b5; border-radius:8px 8px 12px 12px; }
+    .letter-peek { position:absolute; left:9%; right:9%; top:15px; height:139px; background:var(--paper); border:1px solid #f4d4dc; border-radius:5px; transition:transform .65s cubic-bezier(.2,.8,.2,1); }
+    .letter-peek::before { content:""; position:absolute; top:28px; left:18%; right:18%; height:1px; background:#f1ccd6; box-shadow:0 15px #f1ccd6,0 30px #f1ccd6; }
+    .env-front { position:absolute; inset:28px 0 0; overflow:hidden; border-radius:0 0 12px 12px; background:linear-gradient(145deg,transparent 49.5%,#d9819c 50%) left/50% 100% no-repeat,linear-gradient(215deg,transparent 49.5%,#e18ca5 50%) right/50% 100% no-repeat; }
+    .env-flap { position:absolute; top:28px; left:0; width:100%; height:100px; background:#f0b1c2; clip-path:polygon(0 0,100% 0,50% 100%); transform-origin:top; transition:transform .55s ease; }
+    .seal { position:absolute; left:50%; top:94px; transform:translate(-50%,-50%); width:42px;height:42px; display:grid;place-items:center; border-radius:50%; color:white; background:#c96382; font-size:21px; box-shadow:0 3px 8px #8f3e5a44; transition:opacity .25s; }
+    .open .env-flap { transform:rotateX(180deg); z-index:0; }.open .letter-peek { transform:translateY(-60px); }.open .seal { opacity:0; }
+    .tap { font:600 12px Arial,sans-serif; color:#a45670; letter-spacing:.08em; text-transform:uppercase; }
+    .letter { display:grid; grid-template-rows:0fr; transition:grid-template-rows .7s ease,margin .7s ease; margin-top:0; }.letter>div{overflow:hidden}.card.open .letter{grid-template-rows:1fr;margin-top:25px}
+    .letter-paper { position:relative; padding:26px 24px 22px; text-align:left; border:1px solid #f1cfda; border-radius:12px; background:repeating-linear-gradient(var(--paper),var(--paper) 31px,#f6e2e7 32px); box-shadow:0 8px 20px #a64f6d12; }
+    .letter-paper::after { content:"♡"; position:absolute; right:18px; top:12px; color:#dc91a6; font-size:23px; }.letter-paper p{margin:0 0 14px;font-size:16px;line-height:1.65}.letter-paper p:last-child{margin-bottom:0}.sign{text-align:right!important;color:#a34f6a;font-style:italic}
+    .again { margin-top:17px; border:1px solid #e8b6c5; border-radius:99px; padding:9px 16px; color:#99516a; background:#fff7f8; font:600 12px Arial,sans-serif; cursor:pointer; }.again:hover{background:#ffe8ef}
+    footer { margin-top:25px; color:#a87887; font:12px Arial,sans-serif; }
+    .float-heart { position:fixed; z-index:5; bottom:-35px; pointer-events:none; color:#e27f9f; animation:rise 2.5s ease-out forwards; }
+    @keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}} @keyframes twinkle{to{opacity:.25;transform:scale(.8) rotate(12deg)}}
+    @media(max-width:420px){.card{padding:29px 20px}.envelope{height:168px}.letter-peek{height:125px}.letter-paper{padding:24px 18px 18px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <span class="sparkle s1" aria-hidden="true">✧</span><span class="sparkle s2" aria-hidden="true">♡</span><span class="sparkle s3" aria-hidden="true">✧</span><span class="sparkle s4" aria-hidden="true">♡</span>
+    <section class="card" aria-labelledby="title">
+      <div class="eyebrow">a tiny something, just for you</div>
+      <h1 id="title">Happy Boyfriend's Day ♡</h1>
+      <p class="intro">I made you a little love letter.<br>Tap the envelope to open it, cutie.</p>
+      <button class="envelope-button" id="envelopeButton" aria-expanded="false" aria-controls="loveLetter" aria-label="Open your love letter">
+        <div class="envelope" aria-hidden="true"><div class="env-back"></div><div class="letter-peek"></div><div class="env-front"></div><div class="env-flap"></div><div class="seal">♥</div></div>
+        <span class="tap" id="tapText">tap to open</span>
+      </button>
+      <div class="letter" id="loveLetter" aria-live="polite"><div><article class="letter-paper">
+        <!-- Personalize this note by changing the words inside the paragraphs. -->
+        <p>My love,</p>
+        <p>Happy Boyfriend's Day to my babyboyy. I LOVE YOU SOOOOO MUCHHH🥹🥹🫶🫶. You mean so much to me i don't even know what i'd do without you. I'm glad that you came into my life and i'm really realllyy greatefull to have you with me. Ik i'm not the perfext girl you  deserve but blg k sale tur soku ulai marble khelim so adjust kori lo (i'm doing my best for you i promise), anyways please don't ever change becows you make my life a little more magical just by being you ILYSM I'MMA CRY😭😭😭😭 I LOVE THAT DIH TOO😍👅ohm ohm anyways ai lab yu cutie.</p>
+        <p>Thank you for every laugh, every sweet little moment, and for being someone my heart feels at "home" with. I hope you always remember how very loved you are.</p>
+        <p>I hope i get to wish you boyfriend's day like this every single year. I'm so lucky to have you🥹🫶 kandi dim bsa imn moom lage tuk🥹🥹🥹you're my baby ilysmmm. ♡</p>
+        <p class="sign">All my love,<br>Your favourite girl ♡</p>
+      </article><button class="again" id="againButton" type="button">Fold it back up</button></div></div>
+      <footer>made with a whole lot of love ♡</footer>
+    </section>
+  </main>
+  <script>
+    const button = document.getElementById('envelopeButton');
+    const card = document.querySelector('.card');
+    const tapText = document.getElementById('tapText');
+    const letter = document.getElementById('loveLetter');
+    function openLetter() {
+      const opening = !card.classList.contains('open');
+      card.classList.toggle('open', opening);
+      button.setAttribute('aria-expanded', String(opening));
+      button.setAttribute('aria-label', opening ? 'Close your love letter' : 'Open your love letter');
+      tapText.textContent = opening ? 'your letter is open ♡' : 'tap to open';
+      if (opening) {
+        for (let i = 0; i < 12; i++) {
+          const heart = document.createElement('span');
+          heart.className = 'float-heart'; heart.textContent = ['♡','♥','✧'][i % 3];
+          heart.style.left = (8 + Math.random() * 84) + 'vw'; heart.style.fontSize = (14 + Math.random() * 18) + 'px';
+          heart.style.animationDelay = (Math.random() * .7) + 's'; document.body.appendChild(heart);
+          heart.addEventListener('animationend', () => heart.remove(), {once:true});
+        }
+        window.setTimeout(() => letter.scrollIntoView({behavior:'smooth',block:'nearest'}), 220);
+      }
+    }
+    button.addEventListener('click', openLetter);
+    document.getElementById('againButton').addEventListener('click', openLetter);
+  </script>
+</body>
+</html>
